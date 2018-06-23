@@ -1,0 +1,20 @@
+# Author:  Corporate
+# Date:    20170101
+# Purpose: Beta testing leveler
+
+use warnings;
+
+sub EVENT_SAY {
+	if ($text=~/Hail/i) {
+		plugin::Whisper("Hi, $name! Would you like to [".quest::saylink("level to 60",1)."]?");
+	}
+	elsif ($text=~/level to 60/i) {
+		if ($client->GetLevel() < 60) {
+			quest::level(60);
+		}
+		else
+		{
+			plugin::Whisper("You're already 60+ you silly goose!");
+		}
+	}
+}
