@@ -1,21 +1,9 @@
--- Call All mobs to aid Cazic Thule if they're still alive
-
-function event_spawn(e)
-	eq.set_timer("Shout",600000);
-	-- use a timer for the zone repop so that the entire zone is not popping twice immediately on zone bootup.
-	eq.set_timer("RepopZone",5000);
-end
-
+-- Code for Whistling Fists quests.
 function event_say(e)
 	if(e.message:findi("gandan has failed in his task")) then
 		e.self:Emote("'s thoughts begin to pervade your own, they creep into your mind with great force. You feel pressure as if your head will explode. You see his thoughts becoming your own. You see in these visions a tome bound in flesh dropped to the ground. You then open your eyes to see that same book, and take it knowing that it was meant for you.");
 		e.other:SummonItem(18898);
 	end
-end
-
-function event_death_complete(e)
-	-- leave out broken golem, The Tempest Reaver, and Irak_Altil
-	send_signal_to_all_npc_in_zone(3, {72078,72074,72012});
 end
 
 function event_trade(e)
@@ -27,6 +15,21 @@ function event_trade(e)
 		e.other:Ding();
 	end
 	item_lib.return_items(e.self, e.other, e.trade)
+end
+
+--[[
+-- Unused code for Addicted Dads
+-- Call All mobs to aid Cazic Thule if they're still alive
+
+function event_spawn(e)
+	eq.set_timer("Shout",600000);
+	-- use a timer for the zone repop so that the entire zone is not popping twice immediately on zone bootup.
+	eq.set_timer("RepopZone",5000);
+end
+
+function event_death_complete(e)
+	-- leave out broken golem, The Tempest Reaver, and Irak_Altil
+	send_signal_to_all_npc_in_zone(3, {72078,72074,72012});
 end
 
 function event_combat(e)
@@ -95,3 +98,4 @@ function Set (list)
   for _, l in ipairs(list) do set[l] = true end
   return set
 end
+--]]
